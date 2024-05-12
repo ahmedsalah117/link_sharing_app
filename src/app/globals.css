@@ -74,3 +74,13 @@
       @apply bg-background text-foreground;
     }
   }
+
+  @layer components{
+    .btn-primary{
+    @apply  text-white bg-main hover:bg-[#8A71FF] hover:text-[#2C1F7C] !important;
+    }
+
+    .btn-secondary{
+      @apply bg-transparent text-main border-main !border hover:bg-secColor !important;
+    }
+  }

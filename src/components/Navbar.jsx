@@ -54,9 +54,9 @@ const Navbar = () => {
     <nav className="bg-white py-4 px-5 w-full rounded-lg my-4">
       {/* Desktop design */}
       <div className="hidden sm:flex justify-between items-center">
-        {/* Todo: Add the correct path here. */}
+        {/* Note that I am using the value "1" here as a placeholder for the user id.. */}
         {isInHomePage ? (
-          <Link href={"/"}>
+          <Link href={`/profile-details/${1}`}>
             <Button className="bg-transparent text-main border-main !border hover:bg-secColor">
               Back to Editor
             </Button>
@@ -105,9 +105,7 @@ const Navbar = () => {
             </Button>
           ) : (
             <Link href={"/"}>
-              <Button className="bg-transparent text-main border-main !border hover:bg-secColor">
-                Preview
-              </Button>
+              <Button className="btn-secondary">Preview</Button>
             </Link>
           )}
         </div>
@@ -140,7 +138,7 @@ const Navbar = () => {
         <div
           className={`${
             !isMenuOpen ? "hidden" : "flex"
-          } p-4 bg-white absolute top-12  -right-5 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+          } p-4 bg-white absolute top-12 shadow-lg  -right-5 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
         >
           <ul
             className="list-none flex flex-col gap-4 items-start justify-end"

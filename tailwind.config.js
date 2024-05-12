@@ -20,7 +20,8 @@ module.exports = {
       colors: {
         main: "#633BFE",
         secColor: "#EFECFF",
-        tertiaryColor: "#e5e7eb",
+        // tertiaryColor: "#e5e7eb",
+        tertiaryColor: "#FAFAFA",
         textPrimary: "#949494",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -74,6 +75,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      screens: {
+        xs: "450px",
       },
     },
   },
