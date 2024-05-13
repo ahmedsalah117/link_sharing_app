@@ -10,45 +10,25 @@ import { updateUserData } from "../../../lib/user/userDetailsSlice.js";
 import { useAppDispatch, useAppSelector } from "../../../lib/hooks.js";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation.js";
+import ProfileLinksForm from "../../../components/profileDetailsComponents/ProfileLinksForm.jsx";
 
-const UserDetailsPage = () => {
+const UserLinksPage = () => {
   const router = useRouter();
   const [profileImgPreview, setProfileImgPreview] = useState(null);
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
   const schema = yup
     .object({
-      firstName: yup.string().required().min(3).max(50),
-      lastName: yup.string().required().min(3).max(50),
-      email: yup
-        .string()
-        .email()
-        .required()
-        .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/),
-      profileImg: yup
-        .mixed()
-        .notRequired()
-        .test({
-          name: "isValidImg",
-          skipAbsent: true,
-          test: (value, ctx) => {
-            console.log(value, "value of img from yup");
-
-            if (value && !value[0]?.type?.startsWith("image/")) {
-              return ctx.createError({
-                message: "Please upload a valid image",
-              });
-            }
-            return true;
-          },
-        }),
+      githubLink: yup.string().required().min(3).max(50),
+      youtubeLink: yup.string().required().min(3).max(50),
+      linkedinLink: yup.string().required(),
     })
     .required();
   const { control, handleSubmit, watch, formState, register, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      firstName: userDetailsState.firstName,
-      lastName: userDetailsState.lastName,
-      email: userDetailsState.email,
+      githubLink: userDetailsState.firstName,
+      youtubeLink: userDetailsState.lastName,
+      linkedinLink: userDetailsState.email,
     },
     mode: "onChange",
   });
@@ -73,10 +53,9 @@ const UserDetailsPage = () => {
 
   function handleProfileDetailsSubmit(data) {
     const userData = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      profileImgLink: profileImgPreview,
+      githubLink: data.firstName,
+      youtubeLink: data.lastName,
+      linkedInLink: data.email,
     };
     // saving the user data to localStorage.
     localStorage.setItem("userDetails", JSON.stringify(userData));
@@ -86,26 +65,14 @@ const UserDetailsPage = () => {
     router.push("/");
   }
 
-  useEffect(() => {
-    if (
-      liveUserDetailsValues?.profileImg &&
-      liveUserDetailsValues?.profileImg[0]?.type?.startsWith("image/")
-    ) {
-      prepareProfileImg();
-    }
-  }, [liveUserDetailsValues.profileImg]);
-
   return (
     <section className="md:flex md:flex-row flex-col justify-between gap-4 py-6 overflow-y-auto">
-      <IphonePreview
-        liveUserDetailsValues={liveUserDetailsValues}
-        profileImgPreview={profileImgPreview}
-      />
+      <IphonePreview liveUserDetailsValues={liveUserDetailsValues} />
       <form
         onSubmit={handleSubmit(handleProfileDetailsSubmit)}
         className="flex-grow"
       >
-        <ProfileDetailsForm
+        <ProfileLinksForm
           control={control}
           isSubmitting={formState.isSubmitting}
           errors={formState.errors}
@@ -117,4 +84,4 @@ const UserDetailsPage = () => {
   );
 };
 
-export default UserDetailsPage;
+export default UserLinksPage;

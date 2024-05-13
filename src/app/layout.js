@@ -1,7 +1,10 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/Navbar.jsx";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import store from "../lib/store.js";
+import StoreProvider from "./StoreProvider.jsx";
+import Navbar from "../components/shared/navbar/Navbar.jsx";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -14,9 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className} bg-tertiaryColor text-textPrimary`}>
         <Toaster />
-        <section className="w-[98%] m-auto  h-lvh">
-          <Navbar />
-          {children}
+        <section className="w-[98%] m-auto ">
+          <StoreProvider>
+            <Navbar />
+            {children}
+          </StoreProvider>
         </section>
       </body>
     </html>

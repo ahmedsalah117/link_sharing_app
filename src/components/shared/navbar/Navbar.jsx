@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo.jsx";
 import Link from "next/link.js";
-import { Button } from "./ui/button.jsx";
 import { Link as LinkIcon, AlignJustify, X, CircleUser } from "lucide-react";
 import { usePathname } from "next/navigation.js";
 import toast from "react-hot-toast";
+import { Button } from "../../ui/button.jsx";
 const Navbar = () => {
   const pathName = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,8 +73,9 @@ const Navbar = () => {
           ""
         ) : (
           <div className="flex gap-2 ">
+            {/* Assuming the user id  to be 1 */}
             <Link
-              href={"/links"}
+              href={`/links/${1}`}
               className={`flex items-center gap-1 hover:bg-secColor hover:text-main font-[600] px-4 py-2 rounded-md duration-100 ${
                 pathName.trim().includes("links") ? isActiveLink : ""
               }`}
@@ -151,8 +152,9 @@ const Navbar = () => {
                 pathName.trim().includes("links") ? "bg-secColor text-main" : ""
               }`}
             >
+              {/* assuming that the user id is 1 */}
               <Link
-                href={"/links"}
+                href={`/links/${1}`}
                 className={`flex items-center gap-1 w-full  font-[600] px-4 py-2 rounded-md duration-100`}
               >
                 <LinkIcon size={16} />
