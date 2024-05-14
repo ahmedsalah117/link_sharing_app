@@ -40,19 +40,19 @@ export default function Home() {
           linkType="github"
           Icon={<Github size={16} className="text-white font-bold" />}
         >
-          Github
+          {userDetailsState?.githubLink || "Github"}
         </SocialLink>
         <SocialLink
           linkType="youtube"
           Icon={<Youtube size={16} className="text-white font-bold" />}
         >
-          Youtube
+          {userDetailsState?.youtubeLink || "Youtube"}
         </SocialLink>
         <SocialLink
           linkType={"linkedin"}
           Icon={<Linkedin size={16} className="text-white font-bold" />}
         >
-          LinkedIn
+          {userDetailsState?.linkedinLink || "LinkedIn"}
         </SocialLink>
       </div>
     </section>

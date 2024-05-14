@@ -6,13 +6,14 @@ import { Github, Youtube, Linkedin } from "lucide-react";
 import { generatePreviewImgLink } from "../../lib/utils.js";
 import { useAppSelector } from "../../lib/hooks.js";
 const IphonePreview = ({
-  githubLink = "Github",
-  youtubeLink = "Youtube",
-  linkedInLink = "Linkedin",
+  githubLink,
+  youtubeLink,
+  linkedinLink,
   liveUserDetailsValues,
   profileImgPreview,
 }) => {
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
+  console.log(userDetailsState, "userDetailsState in Iphone preview");
   return (
     <div className="bg-white py-8 w-full md:w-[45%] rounded-lg flex justify-center items-center shadow-md">
       <div className="relative overflow-hidden">
@@ -56,21 +57,21 @@ const IphonePreview = ({
             Icon={<Github size={16} className="text-white font-bold" />}
             className="py-3 px-4 text-sm"
           >
-            {githubLink}
+            {githubLink || "Github"}
           </SocialLink>
           <SocialLink
             linkType={"youtube"}
             Icon={<Youtube size={16} className="text-white font-bold" />}
             className="py-3 px-4 text-sm"
           >
-            {youtubeLink}
+            {youtubeLink || "Youtube"}
           </SocialLink>
           <SocialLink
             linkType={"linkedin"}
             Icon={<Linkedin size={16} className="text-white font-bold" />}
             className="py-3 px-4 text-sm"
           >
-            {linkedInLink}
+            {linkedinLink || "Linkedin"}
           </SocialLink>
         </div>
       </div>

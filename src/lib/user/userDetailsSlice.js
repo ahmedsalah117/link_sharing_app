@@ -29,5 +29,5 @@ const userDetailsSlice = createSlice({
   },
 });
 
-export const { updateUserData } = userDetailsSlice.actions;
+export const { updateUserData, updateUserLinks } = userDetailsSlice.actions;
 export const userDetailsReducer = userDetailsSlice.reducer;

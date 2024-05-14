@@ -9,7 +9,20 @@ import { generatePreviewImgLink } from "../../lib/utils.js";
 import { useAppSelector } from "../../lib/hooks.js";
 import LinkCard from "./LinkCard.jsx";
 import toast from "react-hot-toast";
+import { Columns2, Link as LinkIcon } from "lucide-react";
+import { Github, Youtube, Linkedin } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select.jsx";
 const ProfileLinksForm = ({
+  fields,
+  append,
+  remove,
+  liveUserLinksValues,
   control,
   isSubmitting,
   errors,
@@ -17,23 +30,7 @@ const ProfileLinksForm = ({
   profileImgPreview,
 }) => {
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
-  const [links, setLinks] = useState([
-    { id: Math.random() * 15000 },
-    { id: Math.random() * 15000 },
-  ]);
 
-  /**
-   * handles the removal of a link card when the user clicks on the remove button.
-   * @param {*} id
-   * @returns void
-   */
-  function handleRemoveLinkCard(id) {
-    setLinks((prevState) => {
-      return prevState.filter((link) => {
-        return link.id !== id;
-      });
-    });
-  }
   return (
     <section className="bg-white rounded-lg  shadow-md">
       <div className="  py-8 px-8 relative ">
@@ -52,30 +49,105 @@ const ProfileLinksForm = ({
             type="button"
             className="btn-secondary w-full"
             onClick={() => {
-              if (links?.length === 3) {
-                toast.error("You can't add more than 3 links!");
-                return;
-              }
-              setLinks((prevState) => {
-                return [...prevState, { id: Math.random() * 15000 }];
-              });
+              append({ platform: "", link: "", id: fields.length + 1 });
             }}
           >
             <Plus size={15} /> Add your link
           </Button>
         </div>
         <section className="mt-6 flex flex-col gap-4">
-          {links.map((link, index) => {
+          {/* Handling the cards of each platform... */}
+          {fields.map((field, index) => {
             return (
-              <LinkCard
-                key={index + Math.random() * 15000}
-                linkNumber={links.findIndex((l) => l.id === link.id) + 1}
-                id={link.id}
-                handleRemoveLinkCard={handleRemoveLinkCard}
-              />
+              <div key={field.id} className="bg-tertiaryColor rounded-lg p-6">
+                <div className="flex justify-between items-center">
+                  <p className="font-bold text-textPrimary flex justify-between items-center gap-3">
+                    <Columns2 />
+                    Link #{index + 1}
+                  </p>
+                  <p
+                    onClick={() => {
+                      remove(index);
+                    }}
+                    className="font-bold text-textPrimary cursor-pointer"
+                  >
+                    Remove
+                  </p>
+                </div>
+                <div className="flex flex-col gap-5 mt-6">
+                  <div className="w-full ">
+                    <label className="font-600 block text-textPrimary mb-2">
+                      Platform
+                    </label>
+                    <Controller
+                      name={`links.${index}.platform`}
+                      control={control}
+                      render={({ field }) => {
+                        return (
+                          <Select
+                            {...field}
+                            onValueChange={field.onChange}
+                            className="w-full "
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Platform" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="github">
+                                <Github
+                                  size={16}
+                                  className="inline font-bold"
+                                />{" "}
+                                Github
+                              </SelectItem>
+                              <SelectItem value="youtube">
+                                <Youtube
+                                  size={16}
+                                  className="inline font-bold mr-2"
+                                />
+                                Youtube
+                              </SelectItem>
+                              <SelectItem value="linkedin">
+                                <Linkedin
+                                  size={16}
+                                  className="inline font-bold mr-2 mb-1"
+                                />
+                                Linkedin
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        );
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <>
+                      <label className=" font-600 block text-textPrimary mb-1">
+                        Link
+                      </label>
+                      <div className="flex gap-2 items-center bg-white px-3 focus-within:ring-main focus-within:ring-1 rounded-md">
+                        <LinkIcon size={16} />
+                        <Controller
+                          name={`links.${index}.link`}
+                          control={control}
+                          render={({ field }) => {
+                            return (
+                              <Input
+                                {...field}
+                                type="text"
+                                className="border-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-none focus:outline-none "
+                              />
+                            );
+                          }}
+                        />
+                      </div>
+                    </>
+                  </div>
+                </div>
+              </div>
             );
           })}
-          {links.length === 0 && (
+          {fields.length === 0 && (
             <p className="text-textPrimary text-center text-xl">
               You have no links at the moment. Try adding some ☺
             </p>
