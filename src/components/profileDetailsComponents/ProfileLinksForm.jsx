@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input.jsx";
 import { Image as ImageIcon, Plus } from "lucide-react";
 import { Button } from "../ui/button.jsx";
@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "../ui/select.jsx";
 import FormError from "./FormError.jsx";
+import toast from "react-hot-toast";
 const ProfileLinksForm = ({
   fields,
   append,
@@ -40,6 +41,10 @@ const ProfileLinksForm = ({
             type="button"
             className="btn-secondary w-full"
             onClick={() => {
+              if (fields.length === 3) {
+                toast.error("You cannot add more than 3 links!");
+                return;
+              }
               append({ platform: "", link: "", id: fields.length + 1 });
             }}
           >
@@ -141,7 +146,9 @@ const ProfileLinksForm = ({
                         />
                       </div>
                       <FormError>
-                        {errors.links && errors?.links[index]?.link?.message}
+                        {errors?.links?.root?.type === "unique-platforms"
+                          ? ""
+                          : errors?.links && errors?.links[index]?.link?.message}
                       </FormError>
                     </>
                   </div>

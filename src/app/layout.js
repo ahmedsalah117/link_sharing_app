@@ -20,7 +20,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} bg-tertiaryColor text-textPrimary`}>
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            style: {
+              padding: "1rem",
+              fontSize: "1.2rem",
+            },
+          }}
+        />
         <section className="w-[98%] min-h-[90vh] m-auto">
           <StoreProviderWithNoSSR>
             <Navbar />

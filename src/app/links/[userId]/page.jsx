@@ -29,27 +29,33 @@ const UserLinksPage = () => {
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
   const schema = yup
     .object({
-      links: yup.array().of(
-        yup.object().shape({
-          platform: yup.string().required("Platform is required"),
-          link: yup.string().when("platform", {
-            is: (val) => val !== "",
-            then: () =>
-              yup
-                .string()
-                .required("Please add a link")
-                .test(
-                  "link-format",
-                  "Invalid link format",
-                  (value, context) => {
-                    const selectedPlatform = context.parent.platform;
-                    return platformLinkPatterns[selectedPlatform].test(value);
-                  }
-                ),
-          }),
-          id: yup.mixed().notRequired(),
-        })
-      ),
+      links: yup
+        .array()
+        .of(
+          yup.object().shape({
+            platform: yup.string().required("Platform is required"),
+            link: yup.string().when("platform", {
+              is: (val) => val !== "",
+              then: () =>
+                yup
+                  .string()
+                  .required("Please add a link")
+                  .test(
+                    "link-format",
+                    "Invalid link format",
+                    (value, context) => {
+                      const selectedPlatform = context.parent.platform;
+                      return platformLinkPatterns[selectedPlatform].test(value);
+                    }
+                  ),
+            }),
+            id: yup.mixed().notRequired(),
+          })
+        )
+        .test("unique-platforms", "Duplicate platform selected", (value) => {
+          const platforms = value.map((link) => link.platform);
+          return new Set(platforms).size === platforms.length;
+        }),
     })
     .required();
   const { control, handleSubmit, watch, formState, register, reset } = useForm({
@@ -94,7 +100,6 @@ const UserLinksPage = () => {
     router.push("/");
   }
 
-
   const githubLink = useMemo(
     () =>
       liveUserLinksValues.links.find((l) => l?.platform === "github")?.link ||
@@ -113,6 +118,12 @@ const UserLinksPage = () => {
       "",
     [liveUserLinksValues]
   );
+
+  useEffect(() => {
+    if (formState.errors?.links?.root?.type === "unique-platforms") {
+      toast.error("Duplicate platform selected");
+    }
+  }, [formState.errors]);
 
   return (
     <section className="flex lg:flex-row flex-col w-full items-center lg:items-stretch lg:justify-between gap-4 py-6 overflow-y-auto">
