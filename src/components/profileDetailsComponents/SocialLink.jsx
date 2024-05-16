@@ -9,7 +9,7 @@ const SocialLink = ({ children, href, Icon, linkType, className }) => {
       onClick={(e) => {
         e.preventDefault();
         if (href === "/" || !href) {
-          toast.error("You did not add a link for this platform.");
+          toast.error("No available links for this platform.");
         } else {
           window.open(href, "_blank");
         }

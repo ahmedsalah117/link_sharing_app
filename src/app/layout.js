@@ -23,9 +23,11 @@ export default function RootLayout({ children }) {
         <Toaster
           toastOptions={{
             style: {
-              padding: "1rem",
-              fontSize: "1.2rem",
+              fontSize: "1rem",
+              backgroundColor: "#333333",
+              color: "white",
             },
+            position: "bottom-center",
           }}
         />
         <section className="w-[98%] min-h-[90vh] m-auto">
