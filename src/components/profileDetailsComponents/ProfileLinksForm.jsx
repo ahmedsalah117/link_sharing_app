@@ -83,7 +83,7 @@ const ProfileLinksForm = ({
                             onValueChange={field.onChange}
                             className="w-full "
                           >
-                            <SelectTrigger className="w-full focus-visible:ring-main focus:ring-main focus-visible:ring focus:ring-offset-1 focus-visible:ring-offset-1 focus:ring-0">
+                            <SelectTrigger className="w-full focus-visible:ring-main focus:ring-main focus-visible:ring focus:ring-offset-1 focus-visible:ring-offset-1 focus:ring">
                               <SelectValue
                                 placeholder={field.value || "Platform"}
                               />

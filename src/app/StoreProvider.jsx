@@ -8,7 +8,7 @@ import {
 } from "../lib/user/userDetailsSlice.js";
 
 function loadUserDataFromLocalStorage() {
-  if (!localStorage) {
+  if (typeof window === "undefined") {
     return;
   }
   const userData = localStorage.getItem("userDetails");
