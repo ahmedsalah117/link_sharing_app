@@ -31,7 +31,6 @@ const UserDetailsPage = () => {
           name: "isValidImg",
           skipAbsent: true,
           test: (value, ctx) => {
-            console.log(value[0], "info of the img from the test fn");
             if (
               value &&
               value.length > 0 &&
@@ -111,14 +110,16 @@ const UserDetailsPage = () => {
   }, [liveUserDetailsValues.profileImg]);
 
   return (
-    <section className="md:flex md:flex-row flex-col justify-between gap-4 py-6 overflow-y-auto">
-      <IphonePreview
-        liveUserDetailsValues={liveUserDetailsValues}
-        profileImgPreview={profileImgPreview}
-      />
+    <section className="flex lg:flex-row flex-col w-full items-center lg:items-stretch lg:justify-between gap-4 py-6 overflow-y-auto">
+      <div className="lg:min-w-[29%] w-full">
+        <IphonePreview
+          liveUserDetailsValues={liveUserDetailsValues}
+          profileImgPreview={profileImgPreview}
+        />
+      </div>
       <form
         onSubmit={handleSubmit(handleProfileDetailsSubmit)}
-        className="flex-grow"
+        className="w-full lg:max-w-[70%]"
       >
         <ProfileDetailsForm
           control={control}

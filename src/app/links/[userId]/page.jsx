@@ -16,11 +16,12 @@ import { useRouter } from "next/navigation.js";
 import ProfileLinksForm from "../../../components/profileDetailsComponents/ProfileLinksForm.jsx";
 
 
+
+// These are regex that accept any general URL for the listed platforms. I could have made this a bit more complex and strict, but I see that the URLs of each platform varies a lot and I am not aware of a specific format for each platform.
 const platformLinkPatterns = {
-  github: /^https:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/,
-  youtube:
-    /^https:\/\/(www\.)?youtube\.com\/(c\/|channel\/|user\/)[a-zA-Z0-9_-]+\/?$/,
-  linkedin: /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/,
+  github: /^(https?:\/\/)?(www\.)?github\.com\/.+$/,
+  youtube: /^(https?:\/\/)?(www\.)?(youtube\.com\/|youtu\.be\/).+$/,
+  linkedin: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/.+$/,
 };
 
 const UserLinksPage = () => {
@@ -56,6 +57,7 @@ const UserLinksPage = () => {
     defaultValues: {
       links: userDetailsState.userLinks.filter((link, index) => link.link),
     },
+    mode: "onChange",
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -92,9 +94,6 @@ const UserLinksPage = () => {
     router.push("/");
   }
 
-  // useEffect(() => {
-  //   console.log(liveUserLinksValues, "liveUserLinksValues");
-  // }, [liveUserLinksValues]);
 
   const githubLink = useMemo(
     () =>
@@ -116,15 +115,17 @@ const UserLinksPage = () => {
   );
 
   return (
-    <section className="md:flex md:flex-row flex-col justify-between gap-4 py-6 overflow-y-auto">
-      <IphonePreview
-        githubLink={githubLink}
-        youtubeLink={youtubeLink}
-        linkedinLink={linkedinLink}
-      />
+    <section className="flex lg:flex-row flex-col w-full items-center lg:items-stretch lg:justify-between gap-4 py-6 overflow-y-auto">
+      <div className="lg:min-w-[29%] w-full">
+        <IphonePreview
+          githubLink={githubLink}
+          youtubeLink={youtubeLink}
+          linkedinLink={linkedinLink}
+        />
+      </div>
       <form
         onSubmit={handleSubmit(handleUserLinksSubmit)}
-        className="flex-grow"
+        className="w-full h-full lg:max-w-[70%]"
       >
         <ProfileLinksForm
           fields={fields}

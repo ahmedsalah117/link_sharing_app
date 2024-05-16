@@ -40,7 +40,7 @@ const IphonePreview = ({
   }, [userDetailsState.userLinks]);
 
   return (
-    <div className="bg-white py-8 w-full md:w-[45%] rounded-lg flex justify-center items-center shadow-md">
+    <div className="bg-white py-8 w-full h-full rounded-lg flex justify-center items-center shadow-md">
       <div className="relative overflow-hidden">
         <Image
           alt="user-image"

@@ -16,12 +16,9 @@ const ProfileDetailsForm = ({
 }) => {
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
 
-  useEffect(() => {
-    console.log(errors, "errors in the profile details page.");
-  }, [errors]);
 
   return (
-    <section className="bg-white h-full rounded-lg shadow-md">
+    <section className="bg-white h-full w-full rounded-lg shadow-md">
       <div className="  py-8 px-4 sm:px-8 relative">
         <div>
           <h3 className="text-black font-bold text-xl mb-2">Profile Details</h3>
@@ -41,7 +38,6 @@ const ProfileDetailsForm = ({
                     name="profileImg"
                     {...register("profileImg", {
                       validate: (value) => {
-                        console.log(value[0].size, "size of the image");
                         if (value && value.length > 0) {
                           return value[0]?.type?.startsWith("image/")
                             ? ""
@@ -66,8 +62,10 @@ const ProfileDetailsForm = ({
                     className="mb-4 object-cover"
                   />
 
-                  <div className="bg-[#00000080] opacity-0 hover:opacity-100 duration-300 text-white flex flex-col justify-center items-center absolute inset-0 rounded-lg">
-                    <ImageIcon />
+                  <div className="bg-[#00000080] opacity-0 hover:opacity-100 duration-300 text-white flex flex-col justify-center items-center text-center absolute inset-0 rounded-lg">
+                    <p>
+                      <ImageIcon />
+                    </p>
                     <p className="text-sm">Change Image</p>
                   </div>
                 </label>
@@ -114,7 +112,10 @@ const ProfileDetailsForm = ({
             </div>
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-            <label className="block min-w-[200px] text-left" htmlFor="lastName">
+            <label
+              className="block min-w-[200px] text-sm sm:text-base text-left"
+              htmlFor="lastName"
+            >
               Last Name*
             </label>
             <div className="flex flex-col gap-2 w-full sm:w-[60%]">
