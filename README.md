@@ -35,7 +35,7 @@ git clone https://github.com/ahmedsalah117/link_sharing_app.git
 2. Change to the project directory:
 
 ```bash copy
-cd figma_clone
+cd link_sharing_app
 
 ```
 
