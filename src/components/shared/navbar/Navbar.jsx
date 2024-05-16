@@ -182,12 +182,20 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="flex justify-end w-full">
-              {/** Todo: Add the preview route link here. */}
-              <Link href={"/"}>
-                <Button className="bg-transparent text-main border-main !border hover:bg-secColor">
-                  Preview
+              {isInHomePage ? (
+                <Button
+                  onClick={handleCopy}
+                  className="bg-main text-white hover:bg-[#8A71FF] hover:text-[#2C1F7C]"
+                >
+                  {copied ? "Copied!" : "Share link"}
                 </Button>
-              </Link>
+              ) : (
+                <Link href={"/"}>
+                  <Button className="bg-transparent text-main border-main !border hover:bg-secColor">
+                    Preview
+                  </Button>
+                </Link>
+              )}
             </li>
           </ul>
         </div>
