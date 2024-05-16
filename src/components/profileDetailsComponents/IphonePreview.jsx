@@ -51,7 +51,7 @@ const IphonePreview = ({
           priority={true}
         />
         {/* Profile image , name , email previews */}
-        <div className="w-full flex flex-col items-center mb-6 gap-2 absolute left-[50%] top-[12%] translate-x-[-50%] ">
+        <div className="w-full flex flex-col items-center mb-6 gap-2 absolute left-[50%] top-[12%] translate-x-[-50%]">
           {/* Profile Image */}
           <div className="rounded-full border-2 border-main w-[100px] h-[100px] overflow-hidden relative">
             {/* Here I am first checking if the user uploaded a pic already, if not i am checking if we have an old photo of the user in our store, if not this means the user never uploaded a photo, so I am displaying a profile image demo */}
@@ -79,7 +79,7 @@ const IphonePreview = ({
             </h3>
           </div>
           <div className="w-full px-4 text-center">
-            <p className="text-textPrimary text-sm overflow-hidden text-ellipsis whitespace-nowrap">
+            <p className="text-textPrimary text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap">
               {isInLinksForm
                 ? userDetailsState.email
                 : liveUserDetailsValues?.email}

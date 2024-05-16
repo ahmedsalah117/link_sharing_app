@@ -96,7 +96,6 @@ const Navbar = () => {
           </div>
         )}
         <div>
-          {/** Todo: Add the preview route link here. */}
           {isInHomePage ? (
             <Button
               onClick={handleCopy}
