@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <section>
       <div className="bg-main rounded-xl sm:rounded-3xl w-full h-[45%] absolute -z-10 -top-5 right-0"></div>
-      <div className="bg-white rounded-xl shadow-lg flex px-4 sm:px-6 py-8 absolute top-[55%] md:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  flex-col gap-2 md:gap-4 items-center max-w-[50%] min-w-[40%] sm:min-w-[35%] md:min-w-[300px] ">
+      <div className="bg-white rounded-xl shadow-lg flex px-4 sm:px-6 py-8 absolute top-[55%] left-[50%] translate-x-[-50%] translate-y-[-50%]  flex-col gap-2 md:gap-4 items-center max-w-[50%] min-w-[70%] min-[350px]:min-w-[50%] xs:min-w-[45%]  sm:min-w-[35%] md:min-w-[300px] overflow-hidden ">
         <div className="flex flex-col items-center mb-6 gap-4">
           {/* Image */}
           <div className="rounded-full border-2 border-main w-[100px] h-[100px] overflow-hidden relative">
@@ -42,12 +42,14 @@ export default function Home() {
           </div>
           {/* first + last name */}
           <div>
-            <h3 className="font-bold text-black text-2xl">
+            <h3 className="font-bold text-black text-2xl overflow-hidden text-ellipsis whitespace-nowrap">
               {userDetailsState.firstName} &nbsp; {userDetailsState.lastName}
             </h3>
           </div>
           <div className="">
-            <p className="text-textPrimary ">{userDetailsState.email}</p>
+            <p className="text-textPrimary overflow-hidden text-ellipsis whitespace-nowrap">
+              {userDetailsState.email}
+            </p>
           </div>
         </div>
         {/* email */}

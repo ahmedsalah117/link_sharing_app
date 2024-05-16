@@ -26,7 +26,7 @@ const SocialLink = ({ children, href, Icon, linkType, className }) => {
       >
         <div className="flex gap-2 items-center overflow-hidden">
           {Icon && Icon}
-          <p className="text-white text-ellipsis overflow-hidden whitespace-nowrap text-xs sm:text-base">
+          <p className="text-white text-ellipsis overflow-hidden whitespace-nowrap text-xs md:text-base">
             {children}
           </p>
         </div>
