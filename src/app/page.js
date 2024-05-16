@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <section>
       <div className="bg-main rounded-xl sm:rounded-3xl w-full h-[45%] absolute -z-10 -top-5 right-0"></div>
-      <div className="bg-white rounded-xl shadow-lg flex px-8 py-8 absolute top-[55%] md:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  flex-col gap-2 md:gap-4 items-center max-w-[80%] sm:w-[320px] ">
+      <div className="bg-white rounded-xl shadow-lg flex px-4 sm:px-6 py-8 absolute top-[55%] md:top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]  flex-col gap-2 md:gap-4 items-center max-w-[50%] min-w-[40%] sm:min-w-[35%] md:min-w-[300px] ">
         <div className="flex flex-col items-center mb-6 gap-4">
           {/* Image */}
           <div className="rounded-full border-2 border-main w-[100px] h-[100px] overflow-hidden relative">
