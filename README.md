@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Link Sharing app
 
-## Getting Started
+This repository contains the source code for a minimalistic Link Sharing App as part of a coding challenge to show case my front end skills to MHG as a potential employer.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Features
+
+- **Multi-Platform link sharing:** It allows users to share their github, linkedIn, and youtube links as part of their developer profile.
+
+- **Platform Specific URL Validation:** The app implements form validations on each provided URL to make sure it matches the pattern of the selected platform before form submission.
+
+* **Adding Profile Details:** The app allows users to add some profile details such as a profile pic, first name , last name, and email address.
+
+- **Profile Details Form validation** The app implements form validations on the entered first name , last name , email address, and profile picture.
+
+- **Profile Preview**: Users can preview their profile after saving new profile details or links.
+
+- **Link Sharing**: The app allows users to copy their profile link to their clipboard with only 1 click, so that they can easily share it with the world.
+
+- **Responsive Layout**: The app layout is responsive, so that it can work flawlessly on different screen sizes.
+
+- **Hover & Focus Effects**: The app implements hover & focus effects on all interactive elements such as buttons.
+
+# Installation
+
+To install and run this app locally, please follow these steps:
+
+1. Clone the repository:
+
+```bash copy
+git clone https://github.com/ahmedsalah117/mhg_frontend_task.git
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Change to the project directory:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash copy
+cd figma_clone
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
 
-## Learn More
+3. Install the dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+```bash copy
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Start the development server:
 
-## Deploy on Vercel
+```bash Copy
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Access the application in your web browser at http://localhost:3000.
+
+# Acknowledgements
+
+This application is built using various open-source libraries and frameworks. The following dependencies have been utilized in this project:
+
+- NextJS.
+- Shadcn UI.
+- Tailwind CSS.
+- Redux Toolkit.
+- React Hook Form.
+- Yup for form validation.
+- Lucide React.
+
+# Contact
+
+If you have any questions, suggestions, or feedback, feel free to contact me.
+
+You can reach out to me through the following channels:
+
+- **Email**: [engineerahmedbahnasy@gmail.com](mailto:engineerahmedbahnasy@gmail.com)
+- **LinkedIn**: [Eng Ahmed Bahnasy](https://www.linkedin.com/in/eng-ahmed-bahnasy/)
+- **Phone / Whatsapp**: +20 1024768040
+
+Feel free to connect with me on LinkedIn for professional inquiries and networking opportunities.
+
+```
+Happy Hacking!
+```
