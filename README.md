@@ -1,6 +1,6 @@
 # Link Sharing app
 
-This repository contains the source code for a minimalistic Link Sharing App as part of a coding challenge to show case my front end skills to MHG as a potential employer.
+This repository contains the source code for a minimalistic Link Sharing App. Following is a brief breakdown about what the app provides.
 
 
 # Features
@@ -28,7 +28,7 @@ To install and run this app locally, please follow these steps:
 1. Clone the repository:
 
 ```bash copy
-git clone https://github.com/ahmedsalah117/mhg_frontend_task.git
+git clone https://github.com/ahmedsalah117/link_sharing_app.git
 
 ```
 
