@@ -27,9 +27,9 @@ export default function Home() {
     <section>
       <div className="bg-main rounded-xl sm:rounded-3xl w-full h-[45%] absolute -z-10 -top-5 right-0"></div>
       <div className="bg-white rounded-xl shadow-lg flex px-4 sm:px-6 py-8 absolute top-[55%] left-[50%] translate-x-[-50%] translate-y-[-50%]  flex-col gap-2 md:gap-4 items-center max-w-[50%] min-w-[70%] min-[350px]:min-w-[50%] xs:min-w-[45%]  sm:min-w-[35%] md:min-w-[300px] overflow-hidden ">
-        <div className="flex flex-col items-center mb-6 gap-4">
+        <div className="flex flex-col items-center mb-6 gap-4 w-full ">
           {/* Image */}
-          <div className="rounded-full border-2 border-main w-[100px] h-[100px] overflow-hidden relative">
+          <div className="rounded-full border-2 border-main w-[100px] h-[100px] relative">
             <Image
               alt="user-image"
               src={
@@ -41,12 +41,12 @@ export default function Home() {
             />
           </div>
           {/* first + last name */}
-          <div>
-            <h3 className="font-bold text-black text-base  md:text-2xl overflow-hidden text-ellipsis whitespace-nowrap">
+          <div className="w-full">
+            <h3 className="font-bold w-full text-center text-black text-base  md:text-2xl overflow-hidden text-ellipsis whitespace-nowrap">
               {userDetailsState.firstName} &nbsp; {userDetailsState.lastName}
             </h3>
           </div>
-          <div>
+          <div className="w-full">
             <p className="text-textPrimary text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap">
               {userDetailsState.email}
             </p>
