@@ -40,18 +40,18 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("click", () => {
-      setIsMenuOpen((prevState) => !prevState);
+      setIsMenuOpen(false);
     });
 
     return () => {
       window.addEventListener("click", () => {
-        setIsMenuOpen((prevState) => !prevState);
+        setIsMenuOpen(false);
       });
     };
   }, []);
 
   return (
-    <nav className="bg-white py-4 px-5 w-full rounded-lg my-4">
+    <nav className="bg-white py-4 px-5 w-full shadow-md sticky z-50 top-3 left-0 right-0 rounded-lg my-4">
       {/* Desktop design */}
       <div className="hidden sm:flex justify-between items-center">
         {/* Note that I am using the value "1" here as a placeholder for the user id.. */}
@@ -124,7 +124,7 @@ const Navbar = () => {
             size={16}
             onClick={(e) => {
               e.stopPropagation();
-              setIsMenuOpen((prev) => !prev);
+              setIsMenuOpen(false);
             }}
           />
         ) : (
@@ -132,7 +132,7 @@ const Navbar = () => {
             className="cursor-pointer text-black font-bold"
             onClick={(e) => {
               e.stopPropagation();
-              setIsMenuOpen((prev) => !prev);
+              setIsMenuOpen(true);
             }}
           />
         )}

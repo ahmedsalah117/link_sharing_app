@@ -31,9 +31,11 @@ const UserDetailsPage = () => {
           name: "isValidImg",
           skipAbsent: true,
           test: (value, ctx) => {
-            console.log(value, "value of img from yup");
-
-            if (value && !value[0]?.type?.startsWith("image/")) {
+            if (
+              value &&
+              value.length > 0 &&
+              !value[0]?.type?.startsWith("image/")
+            ) {
               return ctx.createError({
                 message: "Please upload a valid image",
               });
@@ -76,7 +78,7 @@ const UserDetailsPage = () => {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
-      profileImgLink: profileImgPreview,
+      profileImgLink: profileImgPreview || userDetailsState.profileImgLink,
     };
     // saving the user data to localStorage.
     localStorage.setItem("userDetails", JSON.stringify(userData));

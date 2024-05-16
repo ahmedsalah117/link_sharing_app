@@ -15,19 +15,46 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation.js";
 import ProfileLinksForm from "../../../components/profileDetailsComponents/ProfileLinksForm.jsx";
 
+
+const platformLinkPatterns = {
+  github: /^https:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/,
+  youtube:
+    /^https:\/\/(www\.)?youtube\.com\/(c\/|channel\/|user\/)[a-zA-Z0-9_-]+\/?$/,
+  linkedin: /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/,
+};
+
 const UserLinksPage = () => {
   const router = useRouter();
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
   const schema = yup
     .object({
-      githubLink: yup.string().required(),
-      youtubeLink: yup.string().required(),
-      linkedinLink: yup.string().required(),
+      links: yup.array().of(
+        yup.object().shape({
+          platform: yup.string().required("Platform is required"),
+          link: yup.string().when("platform", {
+            is: (val) => val !== "",
+            then: () =>
+              yup
+                .string()
+                .required("Please add a link")
+                .test(
+                  "link-format",
+                  "Invalid link format",
+                  (value, context) => {
+                    const selectedPlatform = context.parent.platform;
+                    return platformLinkPatterns[selectedPlatform].test(value);
+                  }
+                ),
+          }),
+          id: yup.mixed().notRequired(),
+        })
+      ),
     })
     .required();
   const { control, handleSubmit, watch, formState, register, reset } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
-      links: [{ platform: "github", link: "", id: 0 }],
+      links: userDetailsState.userLinks.filter((link, index) => link.link),
     },
   });
 
@@ -42,36 +69,58 @@ const UserLinksPage = () => {
   const liveUserLinksValues = watch();
 
   function handleUserLinksSubmit(data) {
-    console.log(data, "data of links form.");
-    const userLinks = {
+    const userDetails = {
       githubLink: data.links.find((l) => l.platform === "github")?.link,
       youtubeLink: data.links.find((l) => l.platform === "youtube")?.link,
       linkedinLink: data.links.find((l) => l.platform === "linkedin")?.link,
+      firstName: userDetailsState.firstName,
+      lastName: userDetailsState.lastName,
+      email: userDetailsState.email,
+      profileImgLink: userDetailsState.profileImgLink,
     };
     // saving the user data to localStorage.
-    localStorage.setItem("userLinks", JSON.stringify(userLinks));
+    localStorage.setItem("userDetails", JSON.stringify(userDetails));
     // updating the store with the user data, so that the data is globally available.
-    dispatch(updateUserLinks(userLinks));
+    dispatch(
+      updateUserLinks({
+        githubLink: userDetails.githubLink,
+        youtubeLink: userDetails.youtubeLink,
+        linkedinLink: userDetails.linkedinLink,
+      })
+    );
     toast.success("Profile links updated successfully");
     router.push("/");
   }
 
-  useEffect(() => {
-    console.log(liveUserLinksValues, "from live");
-  }, [liveUserLinksValues]);
+  // useEffect(() => {
+  //   console.log(liveUserLinksValues, "liveUserLinksValues");
+  // }, [liveUserLinksValues]);
+
+  const githubLink = useMemo(
+    () =>
+      liveUserLinksValues.links.find((l) => l?.platform === "github")?.link ||
+      "",
+    [liveUserLinksValues]
+  );
+  const youtubeLink = useMemo(
+    () =>
+      liveUserLinksValues.links.find((l) => l?.platform === "youtube")?.link ||
+      "",
+    [liveUserLinksValues]
+  );
+  const linkedinLink = useMemo(
+    () =>
+      liveUserLinksValues.links.find((l) => l?.platform === "linkedin")?.link ||
+      "",
+    [liveUserLinksValues]
+  );
 
   return (
     <section className="md:flex md:flex-row flex-col justify-between gap-4 py-6 overflow-y-auto">
       <IphonePreview
-        githubLink={
-          liveUserLinksValues.links.find((l) => l.platform === "github")?.link
-        }
-        youtubeLink={
-          liveUserLinksValues.links.find((l) => l.platform === "youtube")?.link
-        }
-        linkedinLink={
-          liveUserLinksValues.links.find((l) => l.platform === "linkedin")?.link
-        }
+        githubLink={githubLink}
+        youtubeLink={youtubeLink}
+        linkedinLink={linkedinLink}
       />
       <form
         onSubmit={handleSubmit(handleUserLinksSubmit)}
@@ -81,11 +130,9 @@ const UserLinksPage = () => {
           fields={fields}
           append={append}
           remove={remove}
-          liveUserLinksValues={liveUserLinksValues}
           control={control}
           isSubmitting={formState.isSubmitting}
           errors={formState.errors}
-          register={register}
         />
       </form>
     </section>

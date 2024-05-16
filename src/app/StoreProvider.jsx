@@ -2,12 +2,17 @@
 import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore } from "../lib/store";
-import { updateUserData } from "../lib/user/userDetailsSlice.js";
+import {
+  updateUserData,
+  updateUserLinks,
+} from "../lib/user/userDetailsSlice.js";
 
 function loadUserDataFromLocalStorage() {
+  if (!localStorage) {
+    return;
+  }
   const userData = localStorage.getItem("userDetails");
   if (userData) {
-    console.log(userData, "user Data after retrieving from local storage");
     return JSON.parse(userData);
   } else {
     return null;
@@ -22,6 +27,13 @@ export default function StoreProvider({ children }) {
     const returnedUserData = loadUserDataFromLocalStorage();
     if (returnedUserData) {
       storeRef.current.dispatch(updateUserData(returnedUserData));
+      storeRef.current.dispatch(
+        updateUserLinks({
+          githubLink: returnedUserData.githubLink,
+          youtubeLink: returnedUserData.youtubeLink,
+          linkedinLink: returnedUserData.linkedinLink,
+        })
+      );
     }
   }
 

@@ -4,11 +4,13 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  profileImg: "",
   profileImgLink: "",
-  githubLink: "",
-  youtubeLink: "",
-  linkedinLink: "",
+  profileImg: "",
+  userLinks: [
+    { platform: "github", link: "", id: 0 },
+    { platform: "youtube", link: "", id: 1 },
+    { platform: "linkedin", link: "", id: 2 },
+  ],
 };
 
 const userDetailsSlice = createSlice({
@@ -22,9 +24,12 @@ const userDetailsSlice = createSlice({
       state.profileImgLink = action.payload.profileImgLink;
     },
     updateUserLinks: (state, action) => {
-      state.githubLink = action.payload.githubLink;
-      state.youtubeLink = action.payload.youtubeLink;
-      state.linkedinLink = action.payload.linkedinLink;
+      state.userLinks.find((l) => l.platform === "github").link =
+        action.payload.githubLink;
+      state.userLinks.find((l) => l.platform === "youtube").link =
+        action.payload.youtubeLink;
+      state.userLinks.find((l) => l.platform === "linkedin").link =
+        action.payload.linkedinLink;
     },
   },
 });

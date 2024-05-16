@@ -17,14 +17,14 @@ const ProfileDetailsForm = ({
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
   return (
     <section className="bg-white h-full rounded-lg shadow-md">
-      <div className="  py-8 px-8 relative">
+      <div className="  py-8 px-4 sm:px-8 relative">
         <div>
           <h3 className="text-black font-bold text-xl mb-2">Profile Details</h3>
           <p>Add your details to create a personal touch to your profile.</p>
         </div>
         <div className="mt-6 rounded-md">
-          <div className="bg-tertiaryColor p-6 flex flex-col sm:flex-row justify-between items-center rounded-lg">
-            <p className="font-[600]">Profile Picture</p>
+          <div className="bg-tertiaryColor p-6 flex flex-col gap-2 sm:gap-0 sm:flex-row justify-between items-center rounded-lg">
+            <p className="font-[600] ">Profile Picture</p>
             <div className="flex flex-col sm:flex-row gap-3 items-center w-full  sm:w-[60%]">
               {/* Image uploader component */}
               <div className="h-[160px] w-[160px]  flex flex-col gap-1 ">
@@ -36,9 +36,11 @@ const ProfileDetailsForm = ({
                     name="profileImg"
                     {...register("profileImg", {
                       validate: (value) => {
-                        return value[0]?.type?.startsWith("image/")
-                          ? ""
-                          : "Please upload a valid image file.";
+                        if (value && value.length > 0) {
+                          return value[0]?.type?.startsWith("image/")
+                            ? ""
+                            : "Please upload a valid image file.";
+                        }
                       },
                     })}
                     type="file"
@@ -48,6 +50,7 @@ const ProfileDetailsForm = ({
                   />
 
                   <Image
+                    alt="user-image"
                     src={
                       profileImgPreview ||
                       userDetailsState.profileImgLink ||
@@ -76,7 +79,7 @@ const ProfileDetailsForm = ({
           </div>
         </div>
         {/* first name , last name , email inputs. */}
-        <div className="bg-tertiaryColor p-6 my-4 flex flex-col gap-3 rounded-lg ">
+        <div className="bg-tertiaryColor p-3  sm:p-6 my-4 flex flex-col gap-3 rounded-lg ">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
             <label
               className="block min-w-[200px] text-left"
