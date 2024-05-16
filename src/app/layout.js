@@ -1,21 +1,15 @@
-import { Inter, Poppins, Rubik } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { Provider } from "react-redux";
-import store from "../lib/store.js";
 import StoreProvider from "./StoreProvider.jsx";
 import Navbar from "../components/shared/navbar/Navbar.jsx";
+import dynamic from "next/dynamic";
+
+// I disabled SSR for the StoreProvider component to be able to use localStorage there and load the user saved data.
+const StoreProviderWithNoSSR = dynamic(() => import("./StoreProvider.jsx"), {
+  ssr: false,
+});
 const inter = Inter({ subsets: ["latin"] });
-// const poppins = Poppins({
-//   subsets: ["latin"],
-//   variable: "--poppins",
-//   weight: ["400", "500", "600", "700", "800", "900"],
-// });
-// const rubik = Rubik({
-//   subsets: ["latin"],
-//   weight: ["300", "400", "500", "600", "700", "800", "900"],
-//   variable: "--rubik",
-// });
 
 export const metadata = {
   title: "MHC Frontend Task",
@@ -28,10 +22,10 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} bg-tertiaryColor text-textPrimary`}>
         <Toaster />
         <section className="w-[98%] min-h-[90vh] m-auto">
-          <StoreProvider>
+          <StoreProviderWithNoSSR>
             <Navbar />
             {children}
-          </StoreProvider>
+          </StoreProviderWithNoSSR>
         </section>
       </body>
     </html>

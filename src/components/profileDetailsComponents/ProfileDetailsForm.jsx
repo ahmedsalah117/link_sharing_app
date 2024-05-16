@@ -15,6 +15,11 @@ const ProfileDetailsForm = ({
   profileImgPreview,
 }) => {
   const userDetailsState = useAppSelector((state) => state.userDetailsReducer);
+
+  useEffect(() => {
+    console.log(errors, "errors in the profile details page.");
+  }, [errors]);
+
   return (
     <section className="bg-white h-full rounded-lg shadow-md">
       <div className="  py-8 px-4 sm:px-8 relative">
@@ -36,6 +41,7 @@ const ProfileDetailsForm = ({
                     name="profileImg"
                     {...register("profileImg", {
                       validate: (value) => {
+                        console.log(value[0].size, "size of the image");
                         if (value && value.length > 0) {
                           return value[0]?.type?.startsWith("image/")
                             ? ""

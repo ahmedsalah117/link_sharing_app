@@ -31,6 +31,7 @@ const UserDetailsPage = () => {
           name: "isValidImg",
           skipAbsent: true,
           test: (value, ctx) => {
+            console.log(value[0], "info of the img from the test fn");
             if (
               value &&
               value.length > 0 &&
@@ -39,6 +40,10 @@ const UserDetailsPage = () => {
               return ctx.createError({
                 message: "Please upload a valid image",
               });
+            }
+            //not allowing any image above 3 MBs
+            if (value && value.length > 0 && value[0].size > 3145728) {
+              return ctx.createError({ message: "Image is too large" });
             }
             return true;
           },
@@ -60,6 +65,14 @@ const UserDetailsPage = () => {
   const liveUserDetailsValues = watch();
   //Preparing the preview image link from the user uploaded image.
   async function prepareProfileImg() {
+    //not allowing any image above 3 MBs
+    if (
+      liveUserDetailsValues?.profileImg &&
+      liveUserDetailsValues?.profileImg?.length > 0 &&
+      liveUserDetailsValues?.profileImg[0]?.size > 3145728
+    ) {
+      return;
+    }
     if (
       liveUserDetailsValues?.profileImg &&
       liveUserDetailsValues?.profileImg?.length > 0
