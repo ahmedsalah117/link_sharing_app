@@ -42,12 +42,12 @@ export default function Home() {
           </div>
           {/* first + last name */}
           <div>
-            <h3 className="font-bold text-black text-2xl overflow-hidden text-ellipsis whitespace-nowrap">
+            <h3 className="font-bold text-black text-base  md:text-2xl overflow-hidden text-ellipsis whitespace-nowrap">
               {userDetailsState.firstName} &nbsp; {userDetailsState.lastName}
             </h3>
           </div>
-          <div className="">
-            <p className="text-textPrimary overflow-hidden text-ellipsis whitespace-nowrap">
+          <div>
+            <p className="text-textPrimary text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap">
               {userDetailsState.email}
             </p>
           </div>
